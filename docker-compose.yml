@@ -1,0 +1,17 @@
+version: "3"
+
+services: 
+
+  expo:
+    build: 
+      context: ./services/expo
+    volumes:
+      - ./app:/app
+    ports: # container:host
+      - 19002:19002 
+      - 19001:19001
+      - 19000:19000
+    environment: 
+      REACT_NATIVE_PACKAGER_HOSTNAME: "$LOCAL_IP"
+      #expo works on localhost by default and localhost inside a container is not exposed
+      EXPO_DEVTOOLS_LISTEN_ADDRESS: "0.0.0.0" #this is now exposed to the host "localhost" hostname
